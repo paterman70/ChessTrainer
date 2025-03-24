@@ -1,0 +1,41 @@
+﻿@using ChessTrainer.Models
+@using Newtonsoft.Json;
+@model BoardModel
+<div class="chessBoard">
+    @for (int y = 7; y >= 0; y--) // Ranks from 8 to 1
+    {
+        <div class="row">
+            @for (int x = 0; x < 8; x++) // Files from a to h
+            {
+                if (Model.Pieces is object)
+                {
+                    var piece = Model.Pieces.FirstOrDefault(p => p.X == x && p.Y == y);
+                <div class="square @( (x + y) % 2 == 1 ? "white" : "black")" id="@(Convert.ToChar('a' + x))@(y + 1)">
+                    @if (x == 7)
+                    {
+                        <div class="coordinate rank @( (x + y) % 2 == 1 ? "blackText" : "whiteText")">@(y + 1)</div>
+                    }
+
+                    @if (y == 0)
+                    {
+                        <div class="coordinate @( (x + y) % 2 == 1 ? "blackText" : "whiteText")">@(Convert.ToChar('a' + x))</div>
+                    }
+                    @if (piece != null)
+                    {
+                        string color = piece.Piece.Contains("Black") ? "Black" : "White";
+                        <div class="piece" color="@color">
+                            <img src="~/Content/img/@(piece.Piece).png" alt="@piece.Piece">
+                        </div>
+                    }
+                </div>
+                }
+            }
+        </div>
+    }
+</div>
+<div class="buttonPanel">
+    <button name="bstart" onclick="GoToStart()">⏮ Start</button>
+    <button name="bprevious" onclick="previousMove()">◀ Previous</button>
+    <button name="bnext" onclick="nextMove()">▶ Next</button>
+    <button name="bend" onclick="GoToEnd()">⏭ End</button>
+</div>

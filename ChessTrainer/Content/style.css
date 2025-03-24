@@ -1,0 +1,165 @@
+﻿.container1 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 90vh;
+}
+.leftPanel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+}
+
+.rightPanel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+#chessBoardContainer {
+    width: 100%; /* or a fixed width, e.g., 500px */
+    max-width: 500px;
+    height: 500px; /* Adjust as needed */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black; /* Optional, just for visibility */
+}
+.movesPanel {
+    flex: 1;
+    overflow-y: auto;
+    border-top: 2px solid #000;
+    padding: 10px;
+}
+MovesTable, th, td {
+    /* border: 1px solid black;
+    border-collapse: collapse;*/
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-bottom: 0;
+}
+
+th, td {
+    padding: 15px;
+
+}
+    td:focus {
+        background: #E0F8E0;
+        border: 1px dashed red;
+    }
+
+MovesTable > tbody > tr > td {
+    border-right: 1px solid #ddd;
+}
+
+MovesTable > thead > tr > th:last-of-type {
+    border-right: 0px;
+}
+
+MovesTable > tbody > tr > td:last-of-type {
+    border-right: 0px;
+}
+
+.chessBoard {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1 / 1;
+}
+.row {
+    display: flex;
+    flex: 1;
+}
+
+.square {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+   /* aspect-ratio: 1 / 1;
+    width: 12.5%; /* 100% / 8 squares */
+ /*   height: 12.5vw; /* Maintain aspect ratio */
+ /*   min-width: 60px;
+    min-height: 60px;
+    box-sizing: border-box;*/
+}
+
+.white {
+    background-color: #f0d9b5;
+}
+
+.black {
+    background-color: #b58863;
+}
+
+.piece img {
+    width: auto;
+    height: auto;
+}
+
+.coordinate {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.rank {
+    left: auto;
+    top: 2px;
+    right: 2px;
+}
+
+.blackText {
+    color: #b58863;
+}
+
+.whiteText {
+    color: #f0d9b5;
+}
+
+
+
+.chartPanel {
+    flex: 1;
+    overflow-y: auto;
+    border-top: 2px solid #000;
+    padding: 10px;
+}
+
+.MetaDataPanel {
+    margin-top: 40px;
+    flex: 1;
+    border-top: 2px solid #000;
+    padding: 10px;
+}
+.buttonPanel {
+    margin-top: 40px;
+    display: flex;
+    gap: 10px;
+}
+
+.buttonPanel button {
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+/*
+@media (min-width:600px) {
+    .chessBoard {
+        width: 600px;
+        height: 600px;
+    }
+}
+
+@media (max-width:600px) {
+    .coordinate {
+        font-size: 8px;
+    }
+}
+*/

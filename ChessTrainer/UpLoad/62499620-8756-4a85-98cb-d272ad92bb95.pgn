@@ -1,0 +1,37 @@
+[Event "WorldChess Gaming"]
+[Site "worldchess.com"]
+[Date "2023.06.04"]
+[Round "5"]
+[White "Panagiotis Emm Paterakis"]
+[Black "Chesstation, Martin"]
+[Result "0-1"]
+[BlackElo "0"]
+[BlackFideId "308105203"]
+[BlackPlayerId "713139"]
+[TimeControl "Rapid 15 min"]
+[Tournament "Daily Tournament"]
+[UTCDate "2023.06.04"]
+[UTCTime "15:45:51"]
+[WhiteElo "1001"]
+[WhiteFideId "25894900"]
+[WhitePlayerId "356192"]
+
+1. d4 { [%clk 00:14:39] } 1... Nf6 { [%clk 00:14:55] } 2. Bf4
+{ [%clk 00:14:37] } 2... d5 { [%clk 00:14:53] } 3. e3 { [%clk 00:14:34] } 3...
+Bf5 { [%clk 00:14:52] } 4. Nf3 { [%clk 00:14:30] } 4... e6 { [%clk 00:14:48] }
+5. c3 { [%clk 00:14:27] } 5... Bd6 { [%clk 00:14:43] } 6. Ne5
+{ [%clk 00:14:23] } 6... Bxe5 { [%clk 00:14:27] } 7. dxe5 { [%clk 00:14:09] }
+7... Ne4 { [%clk 00:14:15] } 8. Qb3 { [%clk 00:13:47] } 8... Qc8
+{ [%clk 00:13:18] } 9. Nd2 { [%clk 00:13:04] } 9... Nxd2 { [%clk 00:12:53] }
+10. Kxd2 { [%clk 00:11:39] } 10... O-O { [%clk 00:12:47] } 11. Bd3
+{ [%clk 00:10:31] } 11... Bxd3 { [%clk 00:12:34] } 12. Kxd3 { [%clk 00:10:28] }
+12... c5 { [%clk 00:12:29] } 13. Ke2 { [%clk 00:10:26] } 13... Nc6
+{ [%clk 00:12:17] } 14. Rad1 { [%clk 00:08:57] } 14... Rd8 { [%clk 00:11:03] }
+15. Kf1 { [%clk 00:07:58] } 15... b6 { [%clk 00:10:09] } 16. Bg5
+{ [%clk 00:07:37] } 16... Rd7 { [%clk 00:09:59] } 17. Qc2 { [%clk 00:07:13] }
+17... Nxe5 { [%clk 00:09:32] } 18. Bf4 { [%clk 00:05:42] } 18... Ng6
+{ [%clk 00:08:45] } 19. Bg3 { [%clk 00:05:37] } 19... Qa6+ { [%clk 00:08:15] }
+20. c4 { [%clk 00:05:19] } 20... Qxa2 { [%clk 00:07:42] } 21. cxd5
+{ [%clk 00:04:47] } 21... Rxd5 { [%clk 00:07:30] } 22. Rxd5 { [%clk 00:04:38] }
+22... Qxd5 { [%clk 00:07:28] } 23. f3 { [%clk 00:04:38] } 23... Rd8
+{ [%clk 00:07:14] } 0-1

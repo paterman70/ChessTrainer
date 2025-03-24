@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Board</title>
+    <link rel="stylesheet" href="~/Content/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    @Styles.Render("~/Content")
+  
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Chess Trainer", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#" id="loadButton">Load</a></li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Chess Trainer</p>
+        </footer>
+    </div>
+
+
+    @RenderSection("scripts", required: false)
+
+
+    <!-- Hidden file input for PGN selection -->
+    <input type="file" id="fileInput" style="display: none;" accept=".pgn">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    document.getElementById('loadButton').addEventListener('click', function (event) {
+        event.preventDefault(); // Prevents page reload
+        document.getElementById('fileInput').click();
+    });
+
+    document.getElementById('fileInput').addEventListener('change', function (event) {
+            var file = event.target.files[0];
+            if (!file) return;
+
+            var formData = new FormData();
+            formData.append("file", file);
+
+            fetch('@Url.Action("LoadPGN", "Home")', {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("PGN uploaded and analyzed successfully!");
+                    $("#WhitePlayer").text(data.Metadata.WhitePlayer);
+                    $("#BlackPlayer").text(data.Metadata.BlackPlayer);
+                    $("#WhitePlayerELO").text(data.Metadata.WhitePlayerELO);
+                    $("#BlackPlayerELO").text(data.Metadata.BlackPlayerELO);
+                    $("#Tournament").text(data.Metadata.Tournament);
+                    $("#TournamentDate").text(data.Metadata.TournamentDate);
+                    $("#Score").text(data.Metadata.Score);
+
+                    var moves = data.Moves;
+                    var table = $("#MovesTable");
+                    var row = "<tbody>"; table.append(row);
+                    $.each(moves, function (index, movePair) {
+                        row = "<tr>" +
+                            "<td>" + (index + 1) + "</td>" +
+                            "<td id='White" + index + "' tabindex='0'>" + (movePair[0] || '') + "</td>" +
+                            "<td id='Black" + index + "' tabindex='0'>" + (movePair[1] || '') + "</td>" +
+                            "</tr>";
+                        table.append(row);
+                    });
+                        row = "</tbody>"; table.append(row);
+                  
+                   
+
+                    // Hide static text if no game is loaded
+                    if (!data.Metadata.Tournament.trim()) {
+                        $(".MetaDataPanel").hide();
+                    } else {
+                        $(".MetaDataPanel").show();
+                    }
+
+                    initializeCharts(data.WhiteMobility, data.BlackMobility, data.WhiteValue, data.BlackValue);
+                } else {
+                    alert("Error: " + data.message);
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+   
+
+
+        function initializeCharts(WMobility, BMobility, WValue, BValue) {
+            const canvas = document.getElementById('myChart');
+            if (!canvas) {
+                console.error("Error: Canvas element 'myChart' not found.");
+                return; // Exit function early to prevent errors
+            }
+
+            // Ensure arrays are valid
+            WMobility = WMobility || [];
+            BMobility = BMobility || [];
+            WValue = WValue || [];
+            BValue = BValue || [];
+
+            // Find the longest dataset to determine labels
+            let maxLength = Math.max(WMobility.length, BMobility.length, WValue.length, BValue.length);
+            if (maxLength === 0) maxLength = 1;
+
+            const labels = Array.from({ length: maxLength }, (_, i) => i + 1);
+
+            const ctx = canvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'White Mobility', data: WMobility, borderColor: 'blue', fill: false },
+                        { label: 'Black Mobility', data: BMobility, borderColor: 'red', fill: false },
+                        { label: 'White Value', data: WValue, borderColor: 'green', fill: false },
+                        { label: 'Black Value', data: BValue, borderColor: 'orange', fill: false }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { title: { display: true, text: "Move Number" } },
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+           
+     
+    </script>
+</body>
+</html>

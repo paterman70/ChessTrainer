@@ -1,0 +1,281 @@
+﻿@using ChessTrainer.Models
+@using Newtonsoft.Json;
+@model BoardModel
+
+@{ ViewBag.Title = "Chess Game"; }
+
+@{
+    var SS = ViewBag.ScoreSheet as ScoreSheetModel;
+}
+<body>
+    <div class="container1">
+        <div class="leftPanel">
+            <div id="chessBoardContainer">
+                    @Html.Partial("_Board", Model)
+                 </div>
+
+        </div>
+        <div class="rightPanel">
+            <div class="MetaDataPanel">
+                <span id="Tournament"> </span> <span id="TournamentDate"> </span>
+                <br>
+             
+                <span id="WhitePlayer"> </span> (<span id="WhitePlayerELO"> </span>) ---<span id="BlackPlayer"> </span> (<span id="BlackPlayerELO"> </span>)
+                <span id="Score"> </span>
+
+            </div>
+            <div class="chartPanel">
+
+                <canvas id="myChart"></canvas>
+            </div>
+
+            <div class="movesPanel">
+
+                <table id="MovesTable" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>White</th>
+                            <th>Black</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+   
+
+    <script>
+        function nextMove()
+        {
+                $.ajax({
+                url: '@Url.Action("NextMove", "Home")',  // Calls NextMove() in HomeController
+                type: 'GET',
+                success: function (data) {
+                    if (data.success) {
+                        // Update the chessboard with the new HTML
+                        $("#chessBoardContainer").html(data.boardHtml);
+                        $("#chessBoardContainer").css({
+                            width: "500px",
+                            height: "500px"
+                        });
+
+                        
+                        highlightMove(data.ID);
+                       
+
+
+                        // Reapply CSS if necessary
+                        $("#chessBoardContainer").css({
+                            width: "500px",
+                            height: "500px"
+                        });
+                        // Update the chart data
+                      //  updateChart([data.WhiteMobility, data.BlackMobility, data.WhiteValue, data.BlackValue]);
+
+
+                    } else {
+                        alert("Error loading next move.");
+                    }
+                },
+                error: function () {
+                    alert("You should load a game!");
+                }
+            });
+        }
+          function previousMove()
+        {
+                $.ajax({
+                url: '@Url.Action("PreviousMove", "Home")',  // Calls PreviousMove() in HomeController
+                type: 'GET',
+                success: function (data) {
+                    if (data.success) {
+                        // Update the chessboard with the new HTML
+                        $("#chessBoardContainer").html(data.boardHtml);
+                        highlightMove(data.ID);
+                        // Reapply CSS if necessary
+                        $("#chessBoardContainer").css({
+                            width: "500px",
+                            height: "500px"
+                        });
+                        // Update the chart data
+                       // updateChart([data.WhiteMobility, data.BlackMobility, data.WhiteValue, data.BlackValue]);
+                    } else {
+                        alert("Error loading previous move.");
+                    }
+                },
+                error: function () {
+                    alert("You should load a game!");
+                }
+                });
+
+        }
+
+         function GoToStart()
+        {
+                $.ajax({
+                url: '@Url.Action("Gotostart", "Home")',  // Calls Gotostart() in HomeController
+                type: 'GET',
+                success: function (data) {
+                    if (data.success) {
+                        // Update the chessboard with the new HTML
+                        $("#chessBoardContainer").html(data.boardHtml);
+                        highlightMove(data.ID);
+                        // Reapply CSS if necessary
+                        $("#chessBoardContainer").css({
+                            width: "500px",
+                            height: "500px"
+                        });
+                        // Update the chart data
+                       // updateChart([data.WhiteMobility, data.BlackMobility, data.WhiteValue, data.BlackValue]);
+                    } else {
+                        alert("Error going to start.");
+                    }
+                },
+                error: function () {
+                    alert("You should load a game!");
+                }
+                });
+
+        }
+
+          function GoToEnd()
+        {
+                $.ajax({
+                url: '@Url.Action("Gotoend", "Home")',  // Calls Gotoend() in HomeController
+                type: 'GET',
+                success: function (data) {
+                    if (data.success) {
+                        // Update the chessboard with the new HTML
+                        $("#chessBoardContainer").html(data.boardHtml);
+                        highlightMove(data.ID);
+                        // Reapply CSS if necessary
+                        $("#chessBoardContainer").css({
+                            width: "500px",
+                            height: "500px"
+                        });
+                        // Update the chart data
+                       // updateChart([data.WhiteMobility, data.BlackMobility, data.WhiteValue, data.BlackValue]);
+                    } else {
+                        alert("Error going to end.");
+                    }
+                },
+                error: function () {
+                    alert("You should load a game!");
+                }
+                });
+
+        }
+
+        // Function to highlight the current move
+        function highlightMove(moveIndex) {
+
+            // Remove highlight and blur all cells
+            $("td").css("background-color", "").blur();
+
+            // Remove highlight from all cells
+          //  $("td").css("background-color", "");
+
+            // Apply highlight to the current move
+            let cell = $("#" + moveIndex);
+
+            cell.css("background-color", "yellow");
+            cell.focus();
+        }
+
+
+
+
+
+function updateChart(newData) {
+    // Assuming you're using Chart.js
+    myChart.data.datasets[0].data = newData;
+    myChart.update();
+        }
+
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "ArrowRight") {
+                moveSelection(1); // Next move
+            } else if (event.key === "ArrowLeft") {
+                moveSelection(-1); // Previous move
+            }
+            else if (event.key === "ArrowUp") {
+                moveSelection(-2); // Up move
+            }
+            else if (event.key === "ArrowDown") {
+                moveSelection(2); // Down move
+            }
+        });
+
+      
+
+        function moveSelection(direction) {
+            
+           
+
+            // Send the selected move to HomeController
+            fetch('/Home/SetSelectedMove', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ moveIndex: direction })
+            })
+                .then(response => response.json())
+                .then(data => {
+                   
+
+                    $("#chessBoardContainer").html(data.boardHtml);
+                    highlightMove(data.ID);
+                    // Reapply CSS if necessary
+                    $("#chessBoardContainer").css({
+                        width: "500px",
+                        height: "500px"
+                    });
+                
+                })
+                .catch(error => console.error("Error:", error));
+        }
+
+        $(document).ready(function () {
+            $(document).on("click", "#MovesTable td", function () {
+                var column_num = $(this).index() ;
+                var row_num = $(this).parent().index();
+                if (column_num == 0) return;
+                let moveIndex = 2*row_num+(column_num+1);
+
+                console.log("Clicked Cell:", $(this).text(), "Row:", row_num, "Column:", column_num, "Move Index:", moveIndex);
+
+                $.ajax({
+                    url: '/Home/ClickMouseMove',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ moveIndex: moveIndex }),
+                    success: function (data) {
+                        if (data.success) {
+                            console.log("Response received:", data);
+                            $("#chessBoardContainer").html(data.boardHtml);
+                            highlightMove(data.ID);
+
+                            $("#chessBoardContainer").css({
+                                width: "500px",
+                                height: "500px"
+                            });
+                        } else {
+                            console.error("Error from server:", data.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX Error:", status, error);
+                    }
+                });
+
+                $("#result").html("Row_num =" + row_num + "  ,  Column_num =" + column_num);
+            });
+        });
+
+
+   
+
+    </script>
+
+</body>
