@@ -36,9 +36,18 @@
                         <tr>
                             <th>No</th>
                             <th>White</th>
+                            <th>Mob</th>
+                            <th>Val</th>
+                            <th>Mob</th>
+                            <th>Val</th>
                             <th>Black</th>
+                            <th>Mob</th>
+                            <th>Val</th>
+                            <th>Mob</th>
+                            <th>Val</th>
                         </tr>
                     </thead>
+                    <tbody id="movesTableBody"></tbody>
                 </table>
             </div>
         </div>
@@ -60,9 +69,9 @@
                             height: "500px"
                         });
 
-                        
+
                         highlightMove(data.ID);
-                       
+
 
 
                         // Reapply CSS if necessary
@@ -208,21 +217,21 @@ function updateChart(newData) {
             }
         });
 
-      
+
 
         function moveSelection(direction) {
-            
-           
+
+          
 
             // Send the selected move to HomeController
-            fetch('/Home/SetSelectedMove', {
+            fetch('@Url.Action("SetSelectedMove","Home")', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ moveIndex: direction })
             })
                 .then(response => response.json())
                 .then(data => {
-                   
+
 
                     $("#chessBoardContainer").html(data.boardHtml);
                     highlightMove(data.ID);
@@ -231,7 +240,7 @@ function updateChart(newData) {
                         width: "500px",
                         height: "500px"
                     });
-                
+
                 })
                 .catch(error => console.error("Error:", error));
         }
@@ -241,12 +250,15 @@ function updateChart(newData) {
                 var column_num = $(this).index() ;
                 var row_num = $(this).parent().index();
                 if (column_num == 0) return;
-                let moveIndex = 2*row_num+(column_num+1);
+                else if (column_num == 1) column_num = 0;
+                else if (column_num == 6) column_num = 1;
+
+                let moveIndex = 2*row_num+column_num+1;
 
                 console.log("Clicked Cell:", $(this).text(), "Row:", row_num, "Column:", column_num, "Move Index:", moveIndex);
 
                 $.ajax({
-                    url: '/Home/ClickMouseMove',
+                    url: '@Url.Action("ClickMouseMove", "Home")',
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({ moveIndex: moveIndex }),
@@ -274,7 +286,7 @@ function updateChart(newData) {
         });
 
 
-   
+
 
     </script>
 

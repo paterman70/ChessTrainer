@@ -30,6 +30,7 @@ namespace ChessTrainer.Models
         public void SetGame(List<global::ChessGame.Board> G)
         {
             TheGame = G;
+            moveindex = 0;
         }
         public void SetMove(int m)
         {

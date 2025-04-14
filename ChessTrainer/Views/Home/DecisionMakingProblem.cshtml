@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "DecisionMakingProblem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="AboutContainer">
+    <img src="~/Content/img/RobotChess.png" alt="RobotChess" class="center" style="width: 900px; height: auto; padding-top: 50px;">
+
+    <div class="text">
+        <p>In general, a game of chess is a decision-making problem—the goal is simply to select the optimal move from a set of possible options.</p>
+
+        <p>In 1950, <strong>Claude Shannon</strong> described a theoretical approach to playing a perfect game of chess:</p>
+
+        <blockquote class="blockquote border-start ps-3">
+            <p>
+                "With chess, it is possible, in principle, to play a perfect game, or to construct a machine to do so, as follows:
+                One examines at a given position all possible moves, then all moves for the opponent, and so on, until the end of the game (in each
+                variation). The end must occur, according to the rules of the game, after a finite number of moves. Each of these
+                variations ends in a win, a loss, or a draw. By working backwards from the end, one can determine whether there is a forced win,
+                the position is a draw, or it is lost."
+            </p>
+        </blockquote>
+
+        <p>This principle also applies to the <strong>ChessGame</strong> application. It can list all possible moves and has the potential to evolve its evaluation criteria in order to select the <strong>optimal move</strong>. The next steps involve developing:</p>
+      
+        <h3>1. Evaluation Algorithm</h3>
+        <p>To assess the advantages and disadvantages of different moves, numerical values are assigned to the positions of pieces on the chessboard.</p>
+        <ul>
+            <li>In a <strong>basic implementation</strong>, the evaluation algorithm assigns values based solely on the material worth of the pieces.</li>
+            <li>
+                <strong>More advanced versions</strong> incorporate additional factors such as:
+                <ul>
+                    <li><strong>Piece mobility</strong></li>
+                    <li><strong>Control of key squares</strong></li>
+                    <li><strong>Piece cooperation</strong></li>
+                    <li><strong>King safety</strong></li>
+                    <li><strong>Pawn structure</strong></li>
+                    <li>And many more strategic elements.</li>
+                </ul>
+            </li>
+        </ul>
+       
+        <h3>2. Minimax with Alpha-Beta Pruning</h3>
+        <p>The <strong>Minimax algorithm</strong> is a recursive method that exhaustively explores the game tree to evaluate all possible moves. It simulates future moves and calculates their potential outcomes.</p>
+
+        <ul>
+            <li>Using the <strong>evaluation algorithm</strong>, Minimax determines the best move for the current player.</li>
+            <li>
+                To <strong>optimize the search process</strong>, the algorithm applies <strong>Alpha-Beta Pruning</strong>, which:
+                <ul>
+                    <li>Eliminates <strong>irrelevant branches</strong> in the game tree.</li>
+                    <li><strong>Significantly reduces</strong> computational time while maintaining accuracy.</li>
+                </ul>
+            </li>
+        </ul>
+
+
+        <p>Further information can be found at the links below:</p>
+        <div class="d-grid gap-2">
+            <a class="btn btn-primary" href="https://medium.com/@Html.Raw("@")rjaloudi/a-journey-into-chess-algorithms-strategies-optimization-and-implementation-81f88ac457d3">
+                A journey into chess algorithms
+            </a>
+            <a class="btn btn-danger" href="https://chess.stackexchange.com/questions/27259/has-anyone-attempted-to-characterize-chess-mathematically">
+                Characterize chess mathematically
+            </a>
+            <a class="btn btn-success" href="https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning">
+                Alpha–beta pruning Search Algorithm
+            </a>
+        </div>
+
+
+        </p>
+    </div>
+</div>

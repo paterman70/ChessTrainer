@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "API";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="AboutContainer">
+    <img src="~/Content/img/Source_page-0001.jpg" alt="Source" class="center" style="width: 900px; height: 400px; padding-top: 50px;">
+    <div class="text">
+       
+        <p>The main application was developed in <strong>C#</strong> using <strong>Visual Studio Community 2019</strong>, and its code is available on <a href="https://github.com">GitHub</a>. In the future, it may also be provided as a <strong>Dynamic Link Library (DLL)</strong>.</p>
+
+        <p>As a <strong>console application</strong>, it can be executed from a command prompt using the following implemented flags:</p>
+
+        <ul>
+            <li><strong>-V :</strong> (<em>Verbose</em>) Displays the current position on the screen in characters.</li>
+            <li><strong>-X :</strong> (<em>XML</em>) Exports the analysis to an XML file.</li>
+            <li><strong>-L ‘filename’ :</strong> (<em>Load</em>) Loads and analyzes a PGN file.</li>
+        </ul>
+
+        <p>Currently, only the loading and analysis of the game function correctly. The analysis is performed <strong>only on the main line</strong> and does not cover variations.</p>
+
+        <p>A version of the <strong>players (White-Black)</strong> has been implemented, allowing them to be informed about their position in the game and their available moves. Currently, they choose their move randomly from the available options. However, the player functionality is still incomplete.</p>
+
+        <p>Additionally, the function that accepts a position as input—along with relevant metadata such as <strong>move number</strong> and <strong>active player</strong>—for analysis has not yet been completed. The DLL version of the application is also in a similar state.</p>
+        <br />
+        <h3>2. Interface Application</h3>
+        <p>The interface application was developed as an <strong>ASP.NET MVC</strong> project in <strong>C#</strong> using <strong>Visual Studio Community 2019</strong>. It utilizes the main application as an internal library and is deployed via <strong>IIS</strong>.</p>
+        <br />
+        <h3>3. Source in Github</h3>
+        <p> The source can be found in Github. Stay tuned for updates!</p>
+        <div class="d-grid gap-2">
+            <a class="btn btn-primary" href="https://github.com/paterman70/ChessGame.git">
+                Github : Chess Game
+            </a>
+            <a class="btn btn-danger" href="https://github.com/paterman70/ChessTrainer.git">
+                Github : Chess Trainer
+            </a>
+
+        </div>
+        <br />
+        <h3>4. Download ChessGame Executable</h3> <img src="~/Content/img/Under Construction 2.png" alt="UnderConstraction" >
+        <div class="d-grid gap-2">
+            <a class="btn btn-primary" disabled href="https://github.com/paterman70/ChessGame.git">
+                Chess Game.zip
+            </a>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Application";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>The Application</h2>
+
+<div class="AboutContainer">
+    
+   
+        <img src="~/Content/img/ChessBoard.png" alt="ChessBoard!" class="center" style="width: 500px; height: auto;">
+    
+    <div class="text">
+        <p >
+            In fact there are two applications: <u>ChessTrainer and ChessGame</u>. <b>ChessTrainer aims to be a chess analysis application.</b> It is simply an interface for the <b>ChessGame</b> console application, which implements the chess game.
+           </p>
+        <p>
+            The main function of <b>ChessGame</b> is to record all possible moves a chess player can make in any given position on the board. Additionally, it evaluates
+            the <b>mobility</b> and <b>value</b> of the pieces on both sides for that specific position. It can also list <b>threatened</b> pieces and their <b>supporters</b>, assess <b>
+                control
+                of the center
+            </b>, analyze <b>pawn structure motifs</b>, and more. <b>King safety</b> is an unfamiliar concept to me (!), so I could use some help from my friends.
+            This information can be exported to an <b>XML file</b>, allowing it to support a decision-making system—whether human, machine or both.
+
+        </p>   
+        <p> 
+           The <b>ChessGame</b> application is not yet fully developed. Currently, it can only load a <b>PGN file</b> (main line only) and generate an <b>XML file</b>
+            with the extracted information.To demonstrate how <b>ChessGame</b> works, I developed a <b>web application</b> as its interface. Users can load a
+            <b>PGN file</b>, analyze it with <b>ChessGame</b>, and visualize the <b>mobility</b> and <b>value</b> of the pieces through a graphical representation.
+        </p>
+    </div>
+</div>

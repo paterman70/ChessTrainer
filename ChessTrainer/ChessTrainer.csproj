@@ -197,6 +197,12 @@
     <Content Include="Content\img\Black-Pawn.png" />
     <Content Include="Content\img\Black-Queen.png" />
     <Content Include="Content\img\Black-Rook.png" />
+    <Content Include="Content\img\ChessBoard.PNG" />
+    <Content Include="Content\img\Recruiting1.png" />
+    <Content Include="Content\img\RobotChess.png" />
+    <Content Include="Content\img\Source.PNG" />
+    <Content Include="Content\img\Source_page-0001.jpg" />
+    <Content Include="Content\img\Under Construction 2.png" />
     <Content Include="Content\img\White-Bishop.png" />
     <Content Include="Content\img\White-King.png" />
     <Content Include="Content\img\White-Knight.png" />
@@ -204,12 +210,16 @@
     <Content Include="Content\img\White-Queen.png" />
     <Content Include="Content\img\White-Rook.png" />
     <Content Include="Content\style.css" />
+    <Content Include="DownLoad\ChessGame.exe" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\ChessGame - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ChessGame - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -225,7 +235,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="UpLoad\PlaceHolder.txt">
+    <Content Include="DownLoad\PlaceHolder.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Web.config" />
@@ -239,11 +249,15 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\_Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\_Board.cshtml" />
+    <Content Include="Views\Home\Download.cshtml" />
+    <Content Include="Views\Home\Application.cshtml" />
+    <Content Include="Views\Home\DecisionMakingProblem.cshtml" />
+    <Content Include="Views\Home\API.cshtml" />
+    <Content Include="Views\Home\Recruiting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

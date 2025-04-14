@@ -32,7 +32,40 @@ namespace ChessTrainer.Controllers
 
             return View(MyBoard);
         }
+        public ActionResult About()
+        {
+            return View();
+        }
+        public ActionResult API()
+        {
+            return View();
+        }
 
+        public ActionResult DecisionMakingProblem()
+        {
+            return View();
+        }
+        public ActionResult Application()
+        {
+            return View();
+        }
+        public ActionResult Download()
+        {
+
+
+            return View();
+        }
+        public ActionResult Recruiting()
+        {
+
+            return View();
+        }
+        public ActionResult Contact()
+        {
+
+
+            return View();
+        }
         public JsonResult LoadData()
         {
             string sessionId = Session.SessionID;
@@ -65,7 +98,7 @@ namespace ChessTrainer.Controllers
                 {
                     return Json(new { success = false, message = "Only PGN files are allowed." });
                 }
-
+               
                 StringBuilder sb = new StringBuilder();
                 using (StreamReader sr = new StreamReader(file.InputStream))
                 {
@@ -81,7 +114,7 @@ namespace ChessTrainer.Controllers
                 ChessApp.Load(sb);
                 List<Board> lB = ChessApp.GetTheGame();
                 Sh = ChessApp.GetScoreSheet();
-          
+                Session.Clear();
                 string sessionId = Session.SessionID;
                 Session[$"BoardStates_{sessionId}"] = lB;
                 Session[$"CurrentIndex_{sessionId}"] = -1;
@@ -143,7 +176,7 @@ namespace ChessTrainer.Controllers
                     Session[$"CurrentIndex_{sessionId}"] = lB.Count - 1;
                 }
 
-            return MakeMove(0);
+            return MakeMove(-1);
         }
 
         [HttpPost]
@@ -183,7 +216,7 @@ namespace ChessTrainer.Controllers
                     Session[$"CurrentIndex_{sessionId}"] = ID;
                    
                     // Your logic here (return updated board and move ID)
-                    return MakeMove(1);
+                    return MakeMove(-1);
                 }
             }
             catch
@@ -203,15 +236,12 @@ namespace ChessTrainer.Controllers
             {
                 int currentIndex = Session[$"CurrentIndex_{sessionId}"] != null ? (int)Session[$"CurrentIndex_{sessionId}"] : 0;
                     
-                
-
-
                 if ((currentIndex + i < lB.Count) && (currentIndex + i > -1))
                     currentIndex += i;
                
                     Session[$"CurrentIndex_{sessionId}"] = currentIndex;
                     MyBoard.SetGame(lB);
-                    MyBoard.SetMove(currentIndex);
+                    MyBoard.SetMove(currentIndex+1);
                   
               if (currentIndex % 2 == 0)
                         move = "White" + (currentIndex/2).ToString();
